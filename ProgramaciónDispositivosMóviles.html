@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portada - Programación Multimedia y Multiplataforma</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0ea5e9; /* Sky 500 */
+            --secondary: #8b5cf6; /* Violet 500 */
+            --accent: #ec4899; /* Pink 500 */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrolling for the cover page */
+            background-color: #030712; /* Gray 950 */
+            color: #f9fafb;
+        }
+
+        h1, h2, h3, .font-space {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: auto; /* Let canvas capture mouse movements */
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            pointer-events: none; /* Let clicks pass through to canvas where empty */
+        }
+        
+        .interactive-element {
+            pointer-events: auto; /* Re-enable clicks for buttons and links */
+        }
+
+        /* Glowing Text Effect */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(14, 165, 233, 0.4),
+                         0 0 40px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Text Gradient */
+        .bg-gradient-text {
+            background: linear-gradient(135deg, #38bdf8, #a78bfa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glowing Button Styles */
+        .btn-glow {
+            position: relative;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.5), 
+                        0 0 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-glow:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.8), 
+                        0 0 50px rgba(139, 92, 246, 0.6);
+        }
+
+        .btn-glow:hover::before {
+            left: 100%;
+        }
+
+        /* Fade In Animation */
+        .animate-fade-in-up {
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-700 { animation-delay: 700ms; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Floating animation for decorative elements */
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-purple-500 selection:text-white">
+
+    <!-- Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Main Content Container -->
+    <main class="content-wrapper min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 relative bg-gradient-to-br from-gray-900/40 to-black/80">
+        
+        <!-- Subtle Grid Overlay -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50 z-0"></div>
+
+        <div class="max-w-5xl w-full mx-auto text-center relative z-10">
+            
+            <!-- Top Badge / Code Decorator -->
+            <div class="animate-fade-in-up delay-100 mb-6 flex justify-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-700/50 bg-gray-800/50 backdrop-blur-md text-sm text-gray-300 font-mono">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span>&lt;sys&gt; system_ready :: v2.0 &lt;/sys&gt;</span>
+                </div>
+            </div>
+
+            <!-- Subject Title -->
+            <h1 class="animate-fade-in-up delay-300 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 font-space text-glow">
+                Programación de <br class="hidden md:block" />
+                <span class="bg-gradient-text">Aplicaciones Multimedia</span><br class="hidden md:block" />
+                <span class="text-white">y Multiplataforma</span>
+            </h1>
+
+            <!-- Subtitle / Meta Info -->
+            <div class="animate-fade-in-up delay-500 mt-8 mb-12 text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+                <p>Explora el desarrollo de software interactivo, arquitecturas modernas y despliegue en múltiples entornos.</p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm font-medium">
+                    <div class="px-4 py-2 bg-white/5 rounded-lg border border-white/10 backdrop-blur-sm shadow-xl">
+                        <span class="text-sky-400 block mb-1 uppercase tracking-wider text-xs">Curso</span>
+                        <span class="text-white">2026 / 2027</span>
+                    </div>
+                    <div class="px-4 py-2 bg-white/5 rounded-lg border border-white/10 backdrop-blur-sm shadow-xl">
+                        <span class="text-purple-400 block mb-1 uppercase tracking-wider text-xs">Grado</span>
+                        <span class="text-white">Desarrollo Aplicaciones Multiplataforma</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action Button -->
+            <div class="animate-fade-in-up delay-700 mt-10">
+                <button onclick="startExperience()" class="interactive-element btn-glow font-space font-bold text-lg sm:text-xl px-10 py-4 rounded-full flex items-center justify-center gap-3 mx-auto group">
+                    <span>Empezar</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Decorative UI elements around the screen -->
+        <div class="absolute bottom-8 left-8 hidden lg:block text-gray-500 font-mono text-xs opacity-50 animate-float">
+            [x, y, z] = render_matrix();<br>
+            await init_environment();
+        </div>
+        <div class="absolute top-8 right-8 hidden lg:block opacity-50 animate-float" style="animation-delay: -3s;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-sky-500">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+        </div>
+    </main>
+
+    <script>
+        // Particle Network Background Script
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        // Configuration
+        const config = {
+            particleCount: 120, // Adjust based on performance and screen size
+            particleRadius: 2.5,
+            particleColor: 'rgba(14, 165, 233, 0.6)', // Sky blue with opacity
+            lineColor: 'rgba(139, 92, 246, 0.15)', // Violet with low opacity
+            lineDistance: 150,
+            mouseRadius: 180, // Distance mouse interacts with particles
+            velocityRange: 0.6
+        };
+
+        // Mouse object to track interaction
+        let mouse = {
+            x: null,
+            y: null,
+            radius: config.mouseRadius
+        };
+
+        // Resize Canvas
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Adjust particle count for mobile devices
+            if (width < 768) {
+                config.particleCount = 60;
+                config.lineDistance = 100;
+            } else {
+                config.particleCount = 120;
+                config.lineDistance = 150;
+            }
+            
+            initParticles();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Track Mouse
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        // Track Touch for mobile
+        window.addEventListener('touchmove', (event) => {
+            if(event.touches.length > 0){
+                mouse.x = event.touches[0].clientX;
+                mouse.y = event.touches[0].clientY;
+            }
+        });
+
+        // Reset mouse when it leaves the window
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+        window.addEventListener('touchend', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * config.velocityRange * 2;
+                this.vy = (Math.random() - 0.5) * config.velocityRange * 2;
+                this.baseRadius = config.particleRadius;
+                this.radius = Math.random() * 2 + 1;
+                // Add a subtle color variation (mixing sky and purple)
+                const isPurple = Math.random() > 0.7;
+                this.color = isPurple ? 'rgba(167, 139, 250, 0.7)' : config.particleColor;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                
+                // Add glow to particle
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+            }
+
+            update() {
+                // Check edge collisions and bounce
+                if (this.x + this.radius > width || this.x - this.radius < 0) this.vx = -this.vx;
+                if (this.y + this.radius > height || this.y - this.radius < 0) this.vy = -this.vy;
+
+                // Move particle
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Mouse interactivity
+                if (mouse.x !== null && mouse.y !== null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius) {
+                        // Attraction or repulsion depending on distance
+                        // Here we implement a subtle repulsion
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const pushX = forceDirectionX * force * 2;
+                        const pushY = forceDirectionY * force * 2;
+                        
+                        this.x -= pushX;
+                        this.y -= pushY;
+                        
+                        // Increase size slightly near mouse
+                        if(this.radius < this.baseRadius * 2) {
+                            this.radius += 0.2;
+                        }
+                    } else if (this.radius > this.baseRadius) {
+                        // Shrink back to normal
+                        this.radius -= 0.1;
+                    }
+                }
+
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < config.particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            let opacityValue = 1;
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                                 + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                    
+                    if (distance < (config.lineDistance * config.lineDistance)) {
+                        opacityValue = 1 - (distance / (config.lineDistance * config.lineDistance));
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${opacityValue * 0.3})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                        // Reset shadow for lines
+                        ctx.shadowBlur = 0; 
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            // Clear canvas with a very slight fade for trailing effect (optional, set to clearRect for crisp)
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+            }
+            connectParticles();
+        }
+
+        // Initialization
+        resizeCanvas();
+        animate();
+
+        function startExperience() {
+            // Visual feedback on click
+            const btn = document.querySelector('.btn-glow');
+            btn.innerHTML = `<span class="animate-pulse">Cargando módulos...</span>
+                             <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                             </svg>`;
+            
+            // In a real application, thi
