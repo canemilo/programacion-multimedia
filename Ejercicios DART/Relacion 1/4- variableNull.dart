@@ -1,6 +1,6 @@
 void main() {
   // Declaración de una variable que puede ser nula
-  String? nombre = null;
+  String? nombre;
 
   // Verificación de si la variable es nula antes de usarla
   if (nombre != null) {
