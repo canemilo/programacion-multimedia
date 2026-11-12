@@ -1,20 +1,14 @@
 #  Ejercicios de Dart y Flutter
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" height="40" />
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" height="40" />
-  <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Visual Studio Code" height="40" />
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/dart.svg" alt="Logo Dart" width="110" />
-  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/flutter.svg" alt="Logo Flutter" width="110" />
-  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/visualstudiocode.svg" alt="Logo VS Code" width="110" />
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" height="42" />
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" height="42" />
+  <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="Visual Studio Code" height="42" />
 </p>
 
 Este repositorio es mi rincón de prácticas para la asignatura de Programación Multimedia. Aquí vas a encontrar ejercicios de Dart ordenados por relaciones, empezando desde lo más básico y avanzando poco a poco hacia cosas más completas.
 
-No es un proyecto enorme ni ultra formal: es más bien una especie de cuaderno de trabajo donde cada archivo tiene una pequeña misión clara.
+
 
 ##  Qué contiene este proyecto
 
