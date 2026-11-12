@@ -31,5 +31,5 @@ void main() {
   print('Minima: ${minima(temps)}');
   print('Media: ${media(temps)}');
   
-  // P: Para no descontextualizar el dia, se puede devolver un Map o usar un Record de Dart 3 (String dia, double temp).
+ 
 }
