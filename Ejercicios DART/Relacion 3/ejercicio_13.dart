@@ -43,9 +43,48 @@ void main(){
       print("----------------------------------")
       print(" Lista de colores Actualizada : @colores ")
 
+    } else {
+      print("El color introducido no se encuentra en la lista")
     }
     }
 
+    break;
+
+    case 3:
+    print("Buscar color")
+
+    if(colores.isEmpty){
+      print("LISTA DE COLORES VACIA")
+    } else {
+      print("------------")
+      print("Introduce color a buscar")
+      colorTeclado = stdin.readLineSync()!.toLowerCase();
+      if (colores.contains(colorTeclado)) {
+        print("El color $colorTeclado si se encuentra en la lista ")
+
+      } else {
+        print("El color $colorTeclado no se encuentra en la lista ")
+      }
+    }
+
+    break;
+
+    case 4:
+    print("Mostrar lista de colores")
+
+    if(colores.isEmpty){
+      print("La lista esta vacia")
+    } else {
+      print(" Lista de colores Actualizada : @colores ")
+    }
+
+
+    break;
+
+    case 5:
+    print("\n--- SALIENDO DEL PROGRAMA ---")
+    
+    break;
   }
   }
 
